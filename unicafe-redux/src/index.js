@@ -1,26 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createStore } from 'redux';
+// createStore has been deprecated
+import { legacy_createStore as createStore } from 'redux';
 import reducer from './reducer';
 
 const store = createStore(reducer);
 
 const App = () => {
-    const good = () => {
+    const voteFor = (type) => {
         store.dispatch({
-            type: 'GOOD',
+            type: type,
         });
     };
 
     return (
         <div>
-            <button onClick={good}>good</button>
-            <button>ok</button>
-            <button>bad</button>
-            <button>reset stats</button>
+            <button onClick={() => voteFor('GOOD')}>good</button>
+            <button onClick={() => voteFor('OK')}>ok</button>
+            <button onClick={() => voteFor('BAD')}>bad</button>
+            <button onClick={() => voteFor('ZERO')}>reset stats</button>
             <div>good {store.getState().good}</div>
-            <div>ok</div>
-            <div>bad</div>
+            <div>ok {store.getState().ok}</div>
+            <div>bad {store.getState().bad}</div>
         </div>
     );
 };

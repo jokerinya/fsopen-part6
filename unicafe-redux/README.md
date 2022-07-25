@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Exercises
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 6.1: unicafe revisited, step1
 
-## Available Scripts
+Before implementing the functionality of the UI, let's implement the functionality required by the store.
 
-In the project directory, you can run:
+We have to save the number of each kind of feedback to the store, so the form of the state in the store is:
 
-### `npm start`
+```js
+{
+  good: 5,
+  ok: 4,
+  bad: 2
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The project has the following base for a reducer:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```js
+const initialState = {
+    good: 0,
+    ok: 0,
+    bad: 0,
+};
 
-### `npm test`
+const counterReducer = (state = initialState, action) => {
+    console.log(action);
+    switch (action.type) {
+        case 'GOOD':
+            return state;
+        case 'OK':
+            return state;
+        case 'BAD':
+            return state;
+        case 'ZERO':
+            return state;
+        default:
+            return state;
+    }
+};
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+export default counterReducer;
+```
 
-### `npm run build`
+and a base for its tests
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```js
+import deepFreeze from 'deep-freeze';
+import counterReducer from './reducer';
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+describe('unicafe reducer', () => {
+    const initialState = {
+        good: 0,
+        ok: 0,
+        bad: 0,
+    };
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    test('should return a proper initial state when called with undefined state', () => {
+        const state = {};
+        const action = {
+            type: 'DO_NOTHING',
+        };
 
-### `npm run eject`
+        const newState = counterReducer(undefined, action);
+        expect(newState).toEqual(initialState);
+    });
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    test('good is incremented', () => {
+        const action = {
+            type: 'GOOD',
+        };
+        const state = initialState;
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+        deepFreeze(state);
+        const newState = counterReducer(state, action);
+        expect(newState).toEqual({
+            good: 1,
+            ok: 0,
+            bad: 0,
+        });
+    });
+});
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Implement the reducer and its tests.**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+In the tests, make sure that the reducer is an immutable function with the deep-freeze-library. Ensure that the provided first test passes, because Redux expects that the reducer returns a sensible original state when it is called so that the first parameter state, which represents the previous state, is undefined.
 
-## Learn More
+Start by expanding the reducer so that both tests pass. Then add the rest of the tests, and finally the functionality which they are testing.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 6.2: unicafe revisited, step2
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Now implement the actual functionality of the application.
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Note that since all the code is in the file index.js and you might need to manually reload the page after each change since the automatic reloading of the browser content does not always work for that file!
