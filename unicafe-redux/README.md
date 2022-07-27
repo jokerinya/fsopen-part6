@@ -1,5 +1,13 @@
 # Exercises
 
+> ## Exercises 6.1.-6.2.
+
+Let's make a simplified version of the unicafe-exercise from part 1. Let's handle the state management with Redux.
+
+You can take the project from [this repository](https://github.com/fullstack-hy2020/unicafe-redux) for the base of your project.
+
+_Start by removing the git-configuration of the cloned repository, and by installing dependencies._
+
 ## 6.1: unicafe revisited, step1
 
 Before implementing the functionality of the UI, let's implement the functionality required by the store.
