@@ -1,11 +1,11 @@
+//react
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { legacy_createStore as createStore } from 'redux';
+// store
 import { Provider } from 'react-redux';
+import store from './store';
+// app
 import App from './App';
-import reducer from './reducers/anecdoteReducer';
-
-const store = createStore(reducer);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
