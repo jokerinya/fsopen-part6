@@ -135,3 +135,15 @@ const Filter = () => {
 
 export default Filter;
 ```
+
+> ## Exercises 6.13.-6.14.
+
+## 6.13 Anecdotes and the backend, step1
+
+When the application launches, fetch the anecdotes from the backend implemented using `json-server`.
+
+As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+
+## 6.14 Anecdotes and the backend, step2
+
+Modify the creation of new anecdotes, so that the anecdotes are stored in the backend.
