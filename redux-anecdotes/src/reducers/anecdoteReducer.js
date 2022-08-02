@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import anecdotesService from '../services/anecdotes';
 // const anecdotesAtStart = [
 //     'If it hurts, do it more often',
 //     'Adding manpower to a late software project makes it later!',
@@ -91,4 +92,20 @@ const anecdoteSlice = createSlice({
 
 export const { voteForAnecdote, addNewAnecdote, setAnecdotes } =
     anecdoteSlice.actions;
+
+// we can use async functions in redux by the help of redux thunk library
+export const initializeAnecdotes = () => {
+    return async (dispatch) => {
+        const anecdotes = await anecdotesService.getAll();
+        dispatch(setAnecdotes(sortAnecdotes(anecdotes)));
+    };
+};
+
+export const createAnecdote = (content) => {
+    return async (dispatch) => {
+        const newAnecdote = await anecdotesService.createNew(content);
+        dispatch(addNewAnecdote(newAnecdote));
+    };
+};
+
 export default anecdoteSlice.reducer;

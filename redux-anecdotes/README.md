@@ -1,5 +1,7 @@
 # Exercises
 
+## Exercises 6.1-6.2: [unicafe-redux](https://github.com/jokerinya/fsopen-part6/tree/main/unicafe-redux)
+
 > ## Exercises 6.3.-6.8.
 
 Let's make a new version of the anecdote voting application from part 1. Take the project from [this repository](https://github.com/fullstack-hy2020/redux-anecdotes) to base your solution on.
@@ -147,3 +149,38 @@ As the initial backend data, you can use, e.g. [this](https://github.com/fullsta
 ## 6.14 Anecdotes and the backend, step2
 
 Modify the creation of new anecdotes, so that the anecdotes are stored in the backend.
+
+> ## Exercises 6.15.-6.18.
+
+## 6.15 Anecdotes and the backend, step3
+
+Modify the initialization of Redux store to happen using asynchronous action creators, which are made possible by the `Redux Thunk` library.
+
+## 6.16 Anecdotes and the backend, step4
+
+Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the `Redux Thunk` library.
+
+## 6.17 Anecdotes and the backend, step5
+
+Voting does not yet save changes to the backend. Fix the situation with the help of the `Redux Thunk` library.
+
+## 6.18 Anecdotes and the backend, step6
+
+The creation of notifications is still a bit tedious, since one has to do two actions and use the `setTimeout` function:
+
+```js
+dispatch(setNotification(`new anecdote '${content}'`));
+setTimeout(() => {
+    dispatch(clearNotification());
+}, 5000);
+```
+
+Make an action creator, which enables one to provide the notification as follows:
+
+```js
+dispatch(setNotification(`you voted '${anecdote.content}'`, 10));
+```
+
+The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds.
+
+Implement the use of this improved notification in your application.

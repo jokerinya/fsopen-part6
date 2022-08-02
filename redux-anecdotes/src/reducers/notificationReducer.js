@@ -6,14 +6,28 @@ const notificationSlice = createSlice({
     name: 'notification',
     initialState,
     reducers: {
-        notificate(state, action) {
+        addNotificationMessage(state, action) {
             return action.payload;
         },
-        removeNotification(state) {
+        deleteNotificationMessage(state) {
             return '';
         },
     },
 });
 
-export const { notificate, removeNotification } = notificationSlice.actions;
+export const { addNotificationMessage, deleteNotificationMessage } =
+    notificationSlice.actions;
+
+// this func promisify the setTimeout, so we can 'await' it
+const sleep = (s) => new Promise((resolve) => setTimeout(resolve, s * 1000));
+
+export const setNotification = (message, second) => {
+    return async (dispatch) => {
+        console.log('burada', message);
+        dispatch(addNotificationMessage(message));
+        await sleep(second);
+        dispatch(deleteNotificationMessage());
+    };
+};
+
 export default notificationSlice.reducer;
