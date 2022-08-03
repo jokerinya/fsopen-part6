@@ -101,3 +101,5 @@ Start by expanding the reducer so that both tests pass. Then add the rest of the
 Now implement the actual functionality of the application.
 
 Note that since all the code is in the file index.js and you might need to manually reload the page after each change since the automatic reloading of the browser content does not always work for that file!
+
+## Exercises 6.3-6.21: [redux-anecdotes](https://github.com/jokerinya/fsopen-part6/tree/main/redux-anecdotes)

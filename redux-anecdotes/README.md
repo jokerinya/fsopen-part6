@@ -184,3 +184,25 @@ dispatch(setNotification(`you voted '${anecdote.content}'`, 10));
 The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds.
 
 Implement the use of this improved notification in your application.
+
+> ## Exercises 6.19.-6.21.
+
+## 6.19 anecdotes and connect, step1
+
+The redux store is currently being accessed by the components through the `useSelector` and `useDispatch` hooks.
+
+Modify the _Notification_ component so that it uses the `connect` function instead of the hooks.
+
+## 6.20 anecdotes and connect, step2
+
+Do the same for the _Filter_ and _AnecdoteForm_ components.
+
+## 6.21 anecdotes, the grand finale
+
+You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds, the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification.
+
+Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds. This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) for the setTimeout function might also be useful for this.
+
+---
+
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system.](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)

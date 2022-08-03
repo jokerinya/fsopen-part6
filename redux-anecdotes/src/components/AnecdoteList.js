@@ -1,25 +1,21 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { voteForAnecdote } from '../reducers/anecdoteReducer';
+import { voteAnecdote } from '../reducers/anecdoteReducer';
 import { setNotification } from '../reducers/notificationReducer';
-import anecdotesService from '../services/anecdotes';
 import Notification from './Notification';
 
-const Anecdote = ({ anecdote }) => {
+const Anecdote = (props) => {
     const dispatch = useDispatch();
     const vote = async (anecdote) => {
-        const updatedAnecdote = await anecdotesService.voteForAnecdote(
-            anecdote.id
-        );
-        dispatch(setNotification(`you voted ${updatedAnecdote.content}`, 10));
-        dispatch(voteForAnecdote(updatedAnecdote));
+        dispatch(setNotification(`you voted ${anecdote.content}`, 5));
+        dispatch(voteAnecdote(anecdote.id));
     };
     return (
         <>
-            <div>{anecdote.content}</div>
+            <div>{props.anecdote.content}</div>
             <div>
-                has {anecdote.votes}
-                <button onClick={() => vote(anecdote)}>vote</button>
+                has {props.anecdote.votes}
+                <button onClick={() => vote(props.anecdote)}>vote</button>
             </div>
         </>
     );
